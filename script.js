@@ -10,6 +10,7 @@ const clearButton = document.querySelector(".clear-button");
 const todoInput = document.getElementById("todo-input");
 const addTodoBtn = document.getElementById("add-todo-btn");
 const todoList = document.getElementById("todo-list");
+const expenseChart = document.getElementById("expenseChart");
 
 let totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
 let totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0;
@@ -17,9 +18,45 @@ let bal = parseFloat(localStorage.getItem('balance')) || 0;
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
-document.querySelector('.income-amount').innerHTML = `$${totalIncome}`;
-document.querySelector('.expenses-amount').innerHTML = `$${totalExpense}`;
-document.querySelector('.balance-amount').innerHTML = `$${bal}`;
+let chart;
+
+function initializeChart() {
+    const ctx = expenseChart.getContext('2d');
+    chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Income', 'Expenses'],
+            datasets: [{
+                data: [totalIncome, totalExpense],
+                backgroundColor: [
+                    'rgb(161, 160, 158)',
+                    'rgb(121, 121, 119)'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            family: "'SF Pro', sans-serif"
+                        },
+                        padding: 20
+                    }
+                }
+            }
+        }
+    });
+}
+
+function updateChart() {
+    chart.data.datasets[0].data = [totalIncome, totalExpense];
+    chart.update();
+}
 
 function renderTodos() {
     todoList.innerHTML = '';
@@ -85,6 +122,7 @@ clearButton.addEventListener('click', function() {
         document.querySelector('.expenses-amount').innerHTML = `$${totalExpense}`;
         document.querySelector('.balance-amount').innerHTML = `$${bal}`;
         renderTodos();
+        updateChart();
     }
 });
 
@@ -136,6 +174,7 @@ addItemBtn.addEventListener("click",function(){
     localStorage.setItem('balance', bal);
     localStorage.setItem('transactions', JSON.stringify(transactions));
     
+    updateChart();
     modal.style.display = "none";
     resetForm();
 })
@@ -145,5 +184,5 @@ function resetForm() {
     typeInputs[0].checked = true; 
 }
 
-// Initialize todos on page load
+initializeChart();
 renderTodos();

@@ -368,3 +368,23 @@ body {
     color: #333;
 }
 
+.chart-container {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 300px !important;
+}
+
