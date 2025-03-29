@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <link href="styles.css" rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">
+            <h2>Personal Finance Tracker</h2>
+            <div class="button-group">
+                <button class="clear-button">Clear</button>
+                <button class="add-button">+</button>
+            </div>
+        </div>    
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Add item</h3>
+                <input type="text" id="item-name" placeholder="Name">
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="type" value="income" checked> Income
+                    </label>
+                    <label>
+                        <input type="radio" name="type" value="expense"> Expense
+                    </label>
+                    </label>
+                </div>
+                <input type="number" id="amount" placeholder="Amount">
+                <div class="button-group">
+                    <button id="cancel-btn">Cancel</button>
+                    <button id="add-item-btn">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="balance-card">
+                <div class="balance-left">
+                    <p class="balance-title">Balance</p>
+                    <p class="balance-amount">$0</p>
+                </div>
+                <div class="balance-right">
+                    <p>Income <span class="income-amount">$0</span></p>
+                    <p>Expenses <span class="expenses-amount">$0</span></p>
+                </div>
+            </div>
+
+            <div class="todo-list">
+                <h3>To-Do List</h3>
+                <div class="todo-input-container">
+                    <input type="text" id="todo-input" placeholder="Add new todo">
+                    <button id="add-todo-btn">+</button>
+                </div>
+                <ul id="todo-list">
+                </ul>
+            </div>
+        </div>
+    </div>
+        
+    <script src="script.js"></script>
+</body>
+</html>
